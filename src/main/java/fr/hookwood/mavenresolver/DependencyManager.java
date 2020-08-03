@@ -10,7 +10,8 @@ import java.util.List;
 public class DependencyManager {
 
     private Method method;
-    private URLClassLoader classLoader;
+    private final URLClassLoader classLoader;
+    private final DependencyDownloader dependencyDownloader;
     private List<Dependency> toLoad;
 
     /**
@@ -24,6 +25,7 @@ public class DependencyManager {
         } else {
             throw new ClassCastException("Error while loading URLClassLoader");
         }
+        this.dependencyDownloader = new DependencyDownloader();
 
         try {
             this.method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
@@ -57,12 +59,13 @@ public class DependencyManager {
      * @param libsFolder the folder where the dependency will be placed
      */
     public void load(File libsFolder) {
-        DependencyDownloader dependencyDownloader = new DependencyDownloader();
-        dependencyDownloader.download(this.toLoad, libsFolder, dependencyFile -> {
-            if (dependencyFile != null) {
-                injectJar(dependencyFile);
-            }
-        });
+        synchronized (this.dependencyDownloader) {
+            this.dependencyDownloader.download(this.toLoad, libsFolder, dependencyFile -> {
+                if (dependencyFile != null) {
+                    injectJar(dependencyFile);
+                }
+            });
+        }
     }
 
     /**
