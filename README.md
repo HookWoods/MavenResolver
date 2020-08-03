@@ -13,7 +13,7 @@ DependencyManager dependencyManager = new DependencyManager(this.getClass);
 After you have to preload your dependencies
 
 ```java
-dependencyManager.preLoad("groupId", "artifactId", "version");
+dependencyManager.preLoad(new Dependency("groupId", "artifactId", "version"));
 ```
 
 and to finish
