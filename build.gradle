@@ -1,0 +1,34 @@
+apply plugin: 'java'
+
+group 'fr.hookwood'
+version '1.0-SNAPSHOT'
+
+compileJava.options.encoding = 'UTF-8'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+sourceSets {
+    main {
+        java { srcDirs = ["src/main/java"] }
+        resources { srcDirs = ["src/main/resources"] }
+    }
+    test {
+        java { srcDirs = ["src/test/java"] }
+        resources { srcDirs = ["src/test/resources"] }
+    }
+}
+
+repositories {
+    maven { url 'https://papermc.io/repo/repository/maven-public/' }
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+
+    
+}
