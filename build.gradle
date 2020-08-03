@@ -21,14 +21,3 @@ sourceSets {
         resources { srcDirs = ["src/test/resources"] }
     }
 }
-
-repositories {
-    maven { url 'https://papermc.io/repo/repository/maven-public/' }
-    jcenter()
-    mavenCentral()
-}
-
-dependencies {
-
-    
-}
