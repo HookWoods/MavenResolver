@@ -5,12 +5,6 @@ version '1.0-SNAPSHOT'
 
 compileJava.options.encoding = 'UTF-8'
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-}
-
 sourceSets {
     main {
         java { srcDirs = ["src/main/java"] }
